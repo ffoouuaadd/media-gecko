@@ -1,6 +1,29 @@
 # Media Gecko
 
-Fast desktop media library for video editors.
+> A fast Windows creative asset hub for video editors. Search, preview, organize, download, and drag media directly into Premiere Pro, After Effects, or any folder.
+
+![Media Gecko overview](docs/media/media-gecko-overview.gif)
+
+Media Gecko keeps the creative workflow inside one compact desktop app: local libraries, online SFX, Google Images, media downloads, an internal browser, and a project-aware assistant. The core loop is deliberately simple: **Search → Preview → Drag → Drop.**
+
+## Highlights
+
+- **Instant sound workflow:** preview 136 bundled offline effects, search MyInstants and free providers, then drag cached audio like a normal Windows file.
+- **Visual asset workspace:** search Google Images inside a dedicated window, preview images and transparent PNGs, and save them into the local library.
+- **Editor-first library:** index existing folders without duplicating files; categorize, tag, favorite, filter, preview, and organize assets.
+- **Built-in browser and downloads:** browse asset sites without switching apps, with supported downloads automatically added to the library.
+- **Compact creative tools:** Mini Gecko, universal search, Gecko Tray, projects, SFX Lab, customizable layouts, and polished dark/light themes.
+- **Gecko Assistant:** discuss an edit and launch targeted image, SFX, video, or local-library searches from the conversation.
+
+## See it in action
+
+### Search, preview, and drag sound effects
+
+![Search, preview and drag SFX](docs/media/search-preview-drag.gif)
+
+### Themes and compact layouts
+
+![Theme and layout customization](docs/media/themes-layout.gif)
 
 ## Start
 
@@ -59,7 +82,7 @@ Provider licenses still apply. Check each item before publishing.
 
 ## Windows installer
 
-Run `dist\Media-Gecko-Setup-1.5.0.exe` once. Version 1.5 adds dedicated Google Images workspace, floating Mini Gecko photo previews, theme-aware SFX puck buttons, and neutral theme names. Another Windows x64 PC can use same installer without Node.js or separate media tools. Windows may show SmartScreen warning because app lacks commercial code signing.
+Run `dist\Media-Gecko-Setup-1.5.2.exe` once. Version 1.5 adds a dedicated Google Images workspace, floating Mini Gecko photo previews, theme-aware SFX puck buttons, neutral theme names, and a branded animated installer finish. Another Windows x64 PC can use the same installer without Node.js or separate media tools. Windows may show a SmartScreen warning because the app does not yet have trusted code signing.
 
 MyInstants is integrated as a live native-card search. Previewed, saved, or dragged results cache locally as normal MP3 assets; the full remote catalogue is not bundled. Each upload's rights still apply.
 
