@@ -2,6 +2,14 @@
 
 > A fast Windows creative asset hub for video editors. Search, preview, organize, download, and drag media directly into Premiere Pro, After Effects, or any folder.
 
+## Download Media Gecko for Windows
+
+[![Download Media Gecko 1.5.2](https://img.shields.io/badge/DOWNLOAD%20FOR%20WINDOWS-Media%20Gecko%201.5.2-ff4e18?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/ffoouuaadd/media-gecko/releases/download/v1.5.2/Media-Gecko-Setup-1.5.2.exe)
+
+**[⬇ Download the Windows installer directly (.EXE, approximately 162 MB)](https://github.com/ffoouuaadd/media-gecko/releases/download/v1.5.2/Media-Gecko-Setup-1.5.2.exe)**
+
+No GitHub knowledge is needed: click the button, wait for the download, run the installer, and launch Media Gecko from the Start menu. Windows may show a SmartScreen notice because the installer is not yet signed with a trusted commercial certificate.
+
 ![Media Gecko overview](docs/media/media-gecko-overview.gif)
 
 Media Gecko keeps the creative workflow inside one compact desktop app: local libraries, online SFX, Google Images, media downloads, an internal browser, and a project-aware assistant. The core loop is deliberately simple: **Search → Preview → Drag → Drop.**
