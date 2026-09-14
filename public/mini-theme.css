@@ -1,0 +1,8 @@
+body[data-appearance="light"]{border-color:#c9cdd2;background:#f1f2f4;color:#202327;box-shadow:0 18px 55px #0003}
+body[data-appearance="light"] header,body[data-appearance="light"] #mini-filters,body[data-appearance="light"] footer{border-color:#c9cdd2;background:#eef0f3;color:#656b73}
+body[data-appearance="light"] header input{border-color:#c9cdd2;border-bottom-color:var(--accent);background:#fff;color:#202327}
+body[data-appearance="light"] #mini-filters button,body[data-appearance="light"] kbd{border-color:#c9cdd2;background:#fff;color:#656b73}
+body[data-appearance="light"] #mini-filters button.active{border-color:var(--accent);background:var(--selection);color:#202327}
+body[data-appearance="light"] .mini-result{border-bottom-color:#d8dce0;background:#fff;color:#202327}
+body[data-appearance="light"] .mini-result:hover,body[data-appearance="light"] .mini-result.active{border-color:var(--accent);background:#f3f4f6}
+body[data-appearance="light"] .mini-result mark{background:#eef0f3;color:var(--accent)}

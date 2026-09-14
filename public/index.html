@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171717">
+  <title>Media Gecko</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="workspaces.css">
+  <link rel="stylesheet" href="visibility.css">
+  <link rel="stylesheet" href="workspace-hub.css">
+  <link rel="stylesheet" href="theme-tools.css">
+</head>
+<body>
+  <div class="titlebar"><button id="sidebar-toggle" title="Toggle side panel">☰</button><span class="theme-gecko title-gecko" aria-label="Media Gecko"></span><b>Media Gecko</b><span>Creative Asset Library</span><button id="workspace-compact" title="Collapse workspace chrome">▱</button></div>
+  <main class="workspace">
+    <aside id="sidebar">
+      <div class="brand"><span class="theme-gecko brand-gecko" aria-label="Media Gecko"></span><div><b>Media Gecko</b><span>SEARCH · PREVIEW · DRAG</span></div></div>
+
+      <button class="panel-label group-toggle" data-group-toggle="discover">DISCOVER <span>−</span></button>
+      <div class="nav-group" data-nav-group="discover">
+      <button class="nav active" data-view="search"><i data-icon="search">⌕</i><span>Universal Search</span><b>Ctrl K</b></button>
+      <button class="nav" data-view="youtube"><i data-icon="youtube">YT</i><span>YouTube Media</span></button>
+      <button class="nav" data-view="native"><i data-icon="wave">8B</i><span>SFX</span></button>
+      <button class="nav" data-view="online"><i data-icon="wave">CC</i><span>Free SFX Search</span></button>
+      <button class="nav" data-view="pngsources"><i data-icon="image">IM</i><span>Image Search</span></button>
+      <button class="nav" data-view="downloader"><i data-icon="download">DL</i><span>Social Downloader</span></button>
+      <button class="nav" data-view="browser"><i data-icon="browser">WB</i><span>Browser</span></button>
+      </div>
+
+      <button class="panel-label group-toggle library-label" data-group-toggle="workspace">WORKSPACE <span>−</span></button>
+      <div class="nav-group" data-nav-group="workspace">
+      <button class="nav" data-view="library" data-kind="all"><i data-icon="grid">▦</i><span>All Assets</span><b id="library-count">0</b></button>
+      <button class="nav" data-view="projects"><i data-icon="folder">PR</i><span>Projects</span></button>
+      <button class="nav" data-view="library" data-kind="favorite"><i data-icon="star">★</i><span>Favorites</span></button>
+      </div>
+
+      <button class="panel-label group-toggle library-label" data-group-toggle="library">LIBRARY <span>−</span></button>
+      <div class="nav-group" data-nav-group="library">
+      <button class="nav" data-view="library" data-kind="audio"><i data-icon="wave">♫</i><span>Audio</span></button>
+      <button class="nav" data-view="library" data-kind="image"><i data-icon="image">▧</i><span>Images</span></button>
+      <button class="nav" data-view="library" data-kind="video"><i data-icon="video">▶</i><span>Video</span></button>
+      </div>
+
+      <button class="panel-label group-toggle library-label" data-group-toggle="utilities">UTILITIES <span>−</span></button>
+      <div class="nav-group" data-nav-group="utilities">
+      <button class="nav" data-view="sources" data-default-hidden="true"><i data-icon="external">↗</i><span>Integrations</span></button>
+      <button class="nav settings-nav" data-view="settings"><i data-icon="settings">⚙</i><span>Settings & Storage</span></button>
+      </div>
+
+      <div class="import-actions">
+        <button id="import-files">＋ Files</button>
+        <button id="import-folder">＋ Folder</button>
+      </div>
+      <div class="tool-state"><span id="health-dot"></span><span id="health">Checking tools…</span></div>
+    </aside>
+
+    <div class="content">
+      <header>
+        <div><h1 id="view-title">YouTube Media</h1><p id="view-subtitle">Preview, download MP3 or MP4, then drag into your editor.</p></div>
+        <span id="format" class="format">MP3 · MP4</span>
+      </header>
+
+      <form id="search-form" class="search">
+        <span class="search-icon">⌕</span>
+        <input id="query" autocomplete="off" placeholder="Search media…" autofocus>
+        <button id="clear" type="button" title="Clear">×</button>
+        <button class="search-button" type="submit">SEARCH</button>
+      </form>
+
+      <div id="library-tools" class="library-tools" hidden>
+        <select id="category-filter"><option value="">All categories</option></select>
+        <label><input id="favorites-filter" type="checkbox"> Favorites only</label>
+        <div class="view-switcher" aria-label="Media view">
+          <button type="button" data-mode="icon" title="Icon view">▦</button>
+          <button type="button" data-mode="tile" title="Tile view">▤</button>
+          <button type="button" data-mode="list" title="Content view">☷</button>
+        </div>
+        <button id="organizer-open" class="toolbar-action">ORGANIZER 2.0</button>
+        <span id="library-summary"></span>
+        <div id="category-chips" class="category-chips"></div>
+      </div>
+      <div id="message" class="message" hidden></div>
+
+      <section id="search-section" class="search-home" hidden><div class="search-home-box"><span class="theme-gecko"></span><h2>Universal Gecko Search</h2><p>Local assets, SFX, projects, downloads, and online actions.</p><button id="search-home-open">OPEN SEARCH <kbd>Ctrl K</kbd></button><small>Mini Gecko: <kbd>Alt + Space</kbd></small></div><div id="search-recent" class="search-recent"></div></section>
+
+      <section id="youtube-section" hidden>
+        <div class="section-title"><div><span>RESULTS</span><h2>YouTube media</h2></div><small>Default: MP3 · Optional: MP4</small></div>
+        <div id="youtube-results" class="results"></div>
+      </section>
+
+      <section id="online-section" hidden>
+        <div class="section-title"><div><span>MULTI-SOURCE AUDIO</span><h2>Free SFX</h2></div><small>Mixkit · Archive · Commons · Openverse</small></div>
+        <div class="sfx-tools">
+          <select id="sfx-duration"><option value="">Any duration</option><option value="short">Under 5 sec</option><option value="medium">5–15 sec</option><option value="long">Over 15 sec</option></select>
+          <select id="sfx-category"><option value="">Any category</option></select>
+          <select id="sfx-source"><option value="">All sources</option></select>
+          <select id="sfx-format"><option value="">Any format</option><option value="mp3">MP3</option><option value="wav">WAV</option><option value="ogg">OGG</option></select>
+          <select id="sfx-channel"><option value="">Mono / stereo</option><option value="mono">Mono</option><option value="stereo">Stereo</option></select>
+          <select id="sfx-quality"><option value="">Any quality</option><option value="lossless">Lossless</option><option value="compressed">Compressed</option></select>
+          <label><input id="sfx-favorites" type="checkbox"> Favorites</label>
+          <label><input id="sfx-downloaded" type="checkbox"> Downloaded</label>
+          <label><input id="sfx-recent" type="checkbox"> Recently used</label>
+          <select id="sfx-sort"><option value="relevance">Relevance</option><option value="popular">Most popular</option><option value="newest">Newest</option><option value="shortest">Shortest</option><option value="longest">Longest</option></select>
+        </div>
+        <div id="online-results" class="results"></div>
+      </section>
+
+      <section id="downloader-section" hidden>
+        <div class="section-title"><div><span>PUBLIC MEDIA</span><h2>Instagram · TikTok · YouTube</h2></div><small>Public, accessible URLs only</small></div>
+        <div class="url-downloader">
+          <div class="url-entry"><input id="media-url" placeholder="Paste Instagram Reel, TikTok, or YouTube URL" spellcheck="false"><button id="analyze-url">ANALYZE</button></div>
+          <div id="url-status" class="url-status">Paste URL to inspect media before download.</div>
+          <article id="url-result" class="url-result" hidden>
+            <img id="url-thumb" alt="">
+            <div><mark id="url-platform">MEDIA</mark><h2 id="url-title"></h2><p id="url-meta"></p><small id="url-quality"></small></div>
+            <div class="url-actions"><select id="url-format"><option value="mp4">MP4 VIDEO</option><option value="mp3">MP3 AUDIO</option></select><select id="url-quality"><option value="best">Highest quality</option><option value="1080">Up to 1080p</option><option value="720">Up to 720p</option></select><button id="download-url">DOWNLOAD</button></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="sources-section" hidden>
+        <div class="section-title"><div><span>SOURCES</span><h2>Free SFX libraries</h2></div><small>Provider license applies</small></div>
+        <div id="source-results" class="libraries"></div>
+      </section>
+
+      <section id="png-section" class="image-site-section" hidden>
+        <div class="image-site-toolbar"><button id="image-site-back" title="Back">‹</button><button id="image-site-forward" title="Forward">›</button><button id="image-site-home" title="Google Images home">⌂</button><button id="image-site-refresh" title="Reload">↻</button><div><span class="theme-gecko"></span><b>GOOGLE IMAGES</b><small>Dedicated image workspace</small></div></div>
+        <webview id="image-site-view" src="https://images.google.com/" partition="persist:media-gecko-images"></webview>
+        <div class="image-site-note">Google Images opens directly here. Drag supported images or right-click to save into Media Gecko.</div>
+      </section>
+
+      <section id="browser-section" class="browser-section" hidden>
+        <div id="browser-tabs" class="browser-tabs"><button class="browser-tab active" data-tab-id="home">New Tab</button><button id="new-browser-tab" title="New tab">＋</button></div>
+        <div class="browser-toolbar"><button id="browser-back" title="Back">‹</button><button id="browser-forward" title="Forward">›</button><button id="browser-refresh" title="Refresh">↻</button><input id="browser-url" value="https://www.google.com/" spellcheck="false"><button id="browser-save" title="Download current media">↓</button><button id="browser-go">GO</button></div>
+        <webview id="browser-view" src="https://www.google.com/" partition="persist:media-gecko-browser" allowpopups></webview>
+        <div class="browser-note">Downloads save into Media Gecko library automatically.</div>
+      </section>
+
+      <section id="library-section" hidden>
+        <div class="section-title"><div><span>INDEXED · NO COPIES</span><h2 id="library-heading">All Assets</h2></div><small>Drag any card into editor or folder</small></div>
+        <div id="asset-grid" class="asset-grid"></div><div id="library-pager" class="library-pager"><button id="library-prev">PREVIOUS</button><span id="library-page">PAGE 1</span><button id="library-next">NEXT</button></div>
+      </section>
+
+      <section id="projects-section" class="projects-section" hidden><div class="projects-toolbar"><button id="project-new">NEW PROJECT</button><label><input id="project-show-archived" type="checkbox"> Archived</label></div><div class="projects-shell"><div id="project-list" class="project-list"></div><div id="project-detail" class="project-detail"><div class="no-assets">Create project to connect references, SFX, media, notes, and tray assets.</div></div></div></section>
+
+      <section id="native-section" class="native-section" hidden>
+        <div class="native-toolbar"><input id="native-search" placeholder="Search MyInstants + offline SFX…"><select id="native-category"><option value="">All categories</option></select><select id="native-sort"><option value="popular">Popular</option><option value="recent">Recently added</option><option value="name">Name</option></select><label><input id="native-favorites" type="checkbox"> Favorites</label><label><input id="native-recent" type="checkbox"> Recently played</label><button id="native-filters-toggle">FILTERS</button><button id="native-clear-cache">CLEAR CACHE</button><button id="native-myinstants">MYINSTANTS TRENDING</button></div>
+        <div class="native-notice"><b>MyInstants live + 136 offline</b><span>Search, instant-preview, then save or drag. Used sounds cache locally; rights depend on each upload.</span></div>
+        <div id="native-sfx-grid" class="native-sfx-grid"></div>
+        <div id="native-context" class="native-context" hidden><button data-native-action="play">PLAY</button><button data-native-action="tray">ADD TO GECKO TRAY</button><button data-native-action="reveal">SHOW IN FOLDER</button><button data-native-action="copy">COPY FILE PATH</button><button data-native-action="favorite">FAVORITE</button></div>
+      </section>
+
+      <section id="settings-section" hidden>
+        <div class="section-title"><div><span>CUSTOMIZE</span><h2>Settings</h2></div><small>Changes preview and save instantly</small></div>
+        <div class="settings-panel settings-wide">
+          <details class="settings-block" open><summary>General & Interface <span>Startup, previews, density, views</span></summary>
+            <div class="settings-grid">
+              <label>Default startup tab<select id="setting-startup-tab"></select></label>
+              <label class="toggle-setting"><input id="setting-remember-tab" type="checkbox"><span>Remember last opened tab</span></label>
+              <label>Side panel<select id="setting-sidebar-mode"><option value="full">Expanded</option><option value="icons">Icons only</option><option value="hidden">Hidden</option></select></label>
+              <label class="toggle-setting"><input id="setting-auto-sidebar" type="checkbox"><span>Auto-collapse narrow windows</span></label>
+              <label>UI density<select id="setting-density"><option value="compact">Compact</option><option value="comfortable">Comfortable</option></select></label>
+              <label>Default media view<select id="setting-default-view"><option value="icon">Icons</option><option value="tile">Tiles</option><option value="list">List / Content</option></select></label>
+              <label>Icon size<select id="setting-icon-size"><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select></label>
+              <label>Thumbnail size<select id="setting-thumbnail-size"><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select></label>
+              <label>Preview volume<input id="setting-preview-volume" type="range" min="0" max="1" step="0.01"></label>
+              <label class="toggle-setting"><input id="setting-autoplay" type="checkbox"><span>Autoplay hover previews</span></label>
+              <label>Hover preview delay<select id="setting-hover-delay"><option value="150">150 ms</option><option value="300">300 ms</option><option value="500">500 ms</option><option value="800">800 ms</option></select></label>
+              <label>Animation intensity<select id="setting-animation"><option value="off">Off</option><option value="subtle">Subtle</option><option value="full">Full</option></select></label>
+              <label>Appearance<select id="setting-appearance"><option value="dark">Dark mode</option><option value="light">Light mode</option></select></label>
+              <label class="toggle-setting"><input id="setting-reduce-motion" type="checkbox"><span>Reduce motion</span></label>
+            </div>
+          </details>
+
+          <details class="settings-block"><summary>Theme <span>Six presets and one accent color</span></summary>
+            <div id="theme-presets" class="theme-presets"></div>
+            <div id="theme-colors" class="theme-colors"></div>
+          </details>
+
+          <details id="workspace-settings" class="settings-block"><summary>Layout <span>Optional tab and category order</span></summary>
+            <div class="workspace-recovery"><div><b>Manage every Media Gecko feature</b><span>Hidden tabs remain installed and usable.</span></div><button id="restore-all-tabs">RESTORE ALL TABS</button></div>
+            <div class="layout-columns">
+              <div><h3>Side navigation</h3><p>Drag items between groups. Eye toggles visibility.</p><div id="nav-layout-editor" class="layout-editor"></div></div>
+              <div><h3>Library categories</h3><p>Drag order. Compact hides label. Eye hides category.</p><div id="category-layout-editor" class="layout-editor"></div></div>
+            </div>
+            <button id="show-everything" class="secondary-button">SHOW EVERYTHING</button><button id="reset-layout" class="secondary-button">RESET DEFAULT LAYOUT</button>
+          </details>
+
+          <details class="settings-block" open><summary>Storage <span>Folders, cache size, cleanup</span></summary>
+            <div class="folder-settings">
+              <label>Download folder<div><input id="setting-download-folder" readonly><button data-folder-setting="downloadDir">BROWSE</button></div></label>
+              <label>Library folder<div><input id="setting-library-folder" readonly><button data-folder-setting="libraryDir">BROWSE</button></div></label>
+              <label>Cache location<div><input id="setting-cache-folder" readonly><button data-folder-setting="cacheDir">BROWSE</button></div></label>
+            </div>
+            <div class="cache-limit"><div><b>Maximum cache size</b><span>Oldest temporary files are removed first.</span></div><select id="cache-limit"><option value="1073741824">1 GB</option><option value="5368709120">5 GB</option><option value="10737418240">10 GB</option><option value="0">Unlimited</option></select></div>
+            <label class="toggle-setting inline-toggle"><input id="setting-auto-cleanup" type="checkbox"><span>Automatic cache cleanup</span></label>
+            <div id="cache-groups" class="cache-groups"></div>
+            <button id="clear-all-cache" class="danger-button">CLEAR ALL CACHE</button>
+          </details>
+
+          <details class="settings-block"><summary>Advanced <span>Windows startup and performance</span></summary>
+            <div class="settings-grid">
+              <label class="toggle-setting"><input id="setting-launch-minimized" type="checkbox"><span>Launch app minimized</span></label>
+              <label class="toggle-setting"><input id="setting-start-windows" type="checkbox"><span>Start with Windows</span></label>
+              <label class="toggle-setting"><input id="setting-restore-window" type="checkbox"><span>Restore last window size and position</span></label>
+              <label class="toggle-setting"><input id="setting-hardware" type="checkbox"><span>Hardware acceleration</span></label>
+              <label class="toggle-setting"><input id="setting-performance" type="checkbox"><span>Performance mode for weaker PCs</span></label>
+              <label class="toggle-setting"><input id="setting-confirm-delete" type="checkbox"><span>Confirm before deleting files</span></label>
+            </div>
+            <p class="restart-note">Folder, hardware, and startup changes may require app restart.</p>
+            <button id="reset-settings" class="danger-button">RESET ALL SETTINGS</button>
+          </details>
+          <details class="settings-block"><summary>Organizer & Indexing <span>Watched folders, rules, duplicates</span></summary><div class="settings-subtoolbar"><button id="watched-add">ADD WATCHED FOLDER</button><button id="duplicates-scan">SCAN DUPLICATES</button></div><div id="watched-folders" class="watched-folders"></div><div class="rule-builder"><select id="rule-field"><option value="name">Filename contains</option><option value="kind">File type equals</option><option value="extension">Extension equals</option></select><input id="rule-value" placeholder="whoosh"><input id="rule-category" placeholder="Whooshes"><button id="rule-add">ADD RULE</button></div><div id="rules-list" class="rules-list"></div></details>
+          <details class="settings-block"><summary>Integrations <span>External libraries and provider access</span></summary><div class="integration-list"><article><b>External Libraries</b><span>Freesound · Pixabay · Pexels · Unsplash</span><button id="open-integrations">OPEN LIBRARIES</button></article><article><b>Envato</b><span id="envato-status">Not connected</span><input id="envato-token" type="password" placeholder="Personal API token"><button id="envato-test">TEST CONNECTION</button></article></div></details>
+          <details class="settings-block"><summary>About <span>Build information</span></summary><div class="about-app"><span class="theme-gecko about-gecko"></span><div><h3>Media Gecko</h3><p id="about-version">Version…</p><small>Focused creative asset workspace.</small></div></div></details>
+        </div>
+      </section>
+
+      <section id="empty" class="empty">
+        <img src="gecko-sidebar.png" alt="">
+        <h2>Fast assets for fast edits.</h2>
+        <p>Search online or import local files and folders.</p>
+      </section>
+
+      <aside id="inspector" class="inspector" hidden>
+        <button id="close-inspector" class="close-inspector">×</button>
+        <div id="large-preview" class="large-preview"></div>
+        <label>Name<input id="edit-name"></label>
+        <label>Category<select id="edit-category"></select></label>
+        <label>Tags<input id="edit-tags" placeholder="whoosh, fast, trailer"></label>
+        <label class="favorite-edit"><input id="edit-favorite" type="checkbox"> Favorite</label>
+        <div class="inspector-actions"><button id="save-asset">SAVE</button><button id="reveal-asset">SHOW FILE</button><button id="remove-asset">REMOVE INDEX</button></div>
+      </aside>
+
+      <aside id="image-preview" class="image-preview-panel" hidden>
+        <button id="close-image-preview" class="close-inspector">×</button>
+        <div id="remote-large-preview" class="remote-large-preview checker"><span class="preview-spinner">LOADING</span></div>
+        <h2 id="remote-image-title">Image</h2>
+        <p id="remote-image-meta"></p>
+        <div class="remote-actions"><button id="save-remote-image">SAVE ORIGINAL</button><button id="favorite-remote-image">FAVORITE</button><button id="copy-remote-image">COPY IMAGE</button><button id="copy-remote-url">COPY SOURCE URL</button><button id="open-remote-source">OPEN SOURCE</button></div>
+      </aside>
+
+      <footer><span id="result-count">Ready</span><span>Drag highlighted or library assets directly into editor.</span><kbd>Ctrl K</kbd></footer>
+    </div>
+  </main>
+
+  <div id="audio-deck" class="audio-deck" hidden>
+    <button id="audio-loop" title="Loop">LOOP</button>
+    <button id="play-pause">▶</button>
+    <div class="now-playing"><b id="audio-title">Preview</b><span id="audio-source"></span></div>
+    <span id="current-time">0:00</span>
+    <input id="seek" type="range" min="0" max="1000" value="0">
+    <span id="duration">0:00</span>
+    <span class="volume-icon">VOL</span><input id="volume" type="range" min="0" max="1" step="0.01" value="0.8">
+    <select id="audio-speed" title="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+    <button id="close-audio">×</button>
+    <audio id="audio"></audio>
+  </div>
+  <div id="video-preview" class="video-preview" hidden>
+    <div class="video-preview-head"><div><b id="video-title">Video preview</b><span id="video-source">YouTube</span></div><button id="close-video">×</button></div>
+    <video id="video" controls preload="metadata"></video>
+  </div>
+  <section id="gecko-tray" class="gecko-tray collapsed"><button id="tray-toggle" class="tray-toggle"><span class="theme-gecko"></span><b>GECKO TRAY</b><em id="tray-count">0</em><small>⌃</small></button><div id="tray-items" class="tray-items"></div><button id="tray-clear" class="tray-clear">CLEAR</button></section>
+  <section id="command-palette" class="command-palette" hidden><div class="command-box"><header><span class="theme-gecko"></span><input id="command-query" placeholder="Search assets, tools, commands, history…" autocomplete="off"><kbd>ESC</kbd></header><div class="command-filters"><button class="active" data-command-filter="all">ALL</button><button data-command-filter="audio">AUDIO</button><button data-command-filter="video">VIDEO</button><button data-command-filter="image">IMAGES</button><button data-command-filter="png">PNG</button><button data-command-filter="sfx">SFX</button><button data-command-filter="local">LOCAL</button><button data-command-filter="online">ONLINE</button><button data-command-filter="tool">TOOLS</button></div><div id="command-results" class="command-results"></div><footer>↑ ↓ select · Enter open · Space preview · drag files · Alt Space mini</footer></div></section>
+  <section id="organizer-panel" class="organizer-panel" hidden><div class="organizer-box"><header><div><b>FILE ORGANIZER 2.0</b><span>Database-backed smart folders. Originals stay untouched.</span></div><button id="organizer-close">×</button></header><nav id="smart-folders" class="smart-folders"></nav><div id="organizer-results" class="organizer-results"></div></div></section>
+  <div id="universal-context" class="universal-context" hidden></div>
+  <section id="download-queue" class="download-queue collapsed"><button id="download-queue-toggle"><b>DOWNLOADS</b><em id="download-active">0</em></button><div id="download-jobs"></div></section>
+  <section id="sound-lab" class="sound-lab" hidden><div class="sound-lab-box"><header><div><b>SFX LAB</b><span id="sound-lab-name">Non-destructive processing</span></div><button id="sound-lab-close">×</button></header><audio id="sound-lab-audio" controls></audio><div class="sound-lab-controls"><label>SPEED <input id="lab-speed" type="range" min="0.5" max="2" step="0.05" value="1"><output>1.00×</output></label><label>PITCH <input id="lab-pitch" type="range" min="0.5" max="2" step="0.05" value="1"><output>1.00×</output></label><label>BASS <input id="lab-bass" type="range" min="-20" max="20" value="0"><output>0 dB</output></label><label>TREBLE <input id="lab-treble" type="range" min="-20" max="20" value="0"><output>0 dB</output></label><label>TRIM START <input id="lab-trim-start" type="number" min="0" step="0.1" value="0"></label><label>TRIM END <input id="lab-trim-end" type="number" min="0" step="0.1" value="0"></label><label><input id="lab-reverb" type="checkbox"> REVERB</label><label><input id="lab-reverse" type="checkbox"> REVERSE</label><label><input id="lab-normalize" type="checkbox"> NORMALIZE</label><label><input id="lab-mono" type="checkbox"> MONO</label></div><footer><span>Original file stays unchanged.</span><button id="sound-lab-render">RENDER TO TRAY</button></footer></div></section>
+  <button id="assistant-toggle" class="assistant-toggle" title="Open Gecko Assistant"><span class="theme-gecko"></span><b>AI</b></button>
+  <aside id="assistant-panel" class="assistant-panel" hidden>
+    <header><div><span class="theme-gecko"></span><div><b>GECKO ASSISTANT</b><small id="assistant-status">Connect OpenAI API</small></div></div><button id="assistant-close">×</button></header>
+    <div id="assistant-setup" class="assistant-setup"><p>Chat about current edit. Ask Gecko to find images, SFX, video, or local assets.</p><input id="assistant-key" type="password" placeholder="OpenAI API key (sk-…)"><button id="assistant-connect">CONNECT</button><small>Stored with Windows encryption. API usage billed separately.</small></div>
+    <div id="assistant-chat" class="assistant-chat" hidden><div id="assistant-messages" class="assistant-messages"><article class="assistant-message assistant"><b>GECKO</b><p>Tell me about your edit or ask me to find assets.</p></article></div><form id="assistant-form"><textarea id="assistant-input" rows="2" placeholder="Ask about project or pull assets…"></textarea><button>SEND</button></form><button id="assistant-disconnect" class="assistant-disconnect">REMOVE API KEY</button></div>
+  </aside>
+  <div id="drag-feedback" class="drag-feedback" hidden><img src="gecko-sidebar.png" alt=""><span>Drop into editor or folder</span></div>
+  <script src="app.js"></script>
+  <script src="native-sfx.js"></script>
+  <script src="workspace-hub.js"></script>
+  <script src="assistant.js"></script>
+</body>
+</html>

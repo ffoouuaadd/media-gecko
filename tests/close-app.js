@@ -1,0 +1,3 @@
+const port=Number(process.argv[2]||9333);
+async function main(){const targets=await fetch(`http://127.0.0.1:${port}/json`).then(response=>response.json()),page=targets.find(item=>item.type==="page"&&!/mini\.html/.test(item.url));if(!page)throw new Error("Main window target not found.");const socket=new WebSocket(page.webSocketDebuggerUrl);await new Promise((resolve,reject)=>{socket.onopen=resolve;socket.onerror=reject;});socket.send(JSON.stringify({id:1,method:"Browser.close"}));await new Promise(resolve=>setTimeout(resolve,1000));}
+main().catch(error=>{console.error(error);process.exit(1);});
