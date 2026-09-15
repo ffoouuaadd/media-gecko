@@ -42,6 +42,10 @@ async function main() {
     await new Promise(resolve=>setTimeout(resolve,80));
     const root=getComputedStyle(document.documentElement);
     const palette=['--primary','--orange2','--icon-accent','--selection','--glow','--button-accent','--progress','--waveform'].map(key=>root.getPropertyValue(key).trim());
+    const cacheIcon=document.querySelector('.cache-row .ui-icon');
+    const cacheIconColor=cacheIcon?getComputedStyle(cacheIcon).color:'';
+    const iconColor=root.getPropertyValue('--icon-accent').trim();
+    const lightOverlay=await desktop.setThemeAccent('#00c878','light');
     const support=document.querySelector('.support-link');
     const expanded={display:getComputedStyle(support).display,label:getComputedStyle(support.querySelector('span')).display};
     setSidebarMode('icons');
@@ -52,6 +56,9 @@ async function main() {
       palette,
       uniquePalette:new Set(palette).size,
       oldOrangeRemaining:palette.some(value=>/255, 78, 24|#ff4e18/i.test(value)),
+      cacheIconColor,
+      iconColor,
+      lightOverlay,
       supportHref:support.href,
       supportTarget:support.target,
       expanded,

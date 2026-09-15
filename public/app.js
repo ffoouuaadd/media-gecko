@@ -1355,7 +1355,7 @@ function applyUiSettings() {
   document.body.classList.toggle("performance-mode", uiSettings.performanceMode);
   audio.volume = Number(uiSettings.previewVolume);
   $("#volume").value = String(uiSettings.previewVolume);
-  window.desktop?.setThemeAccent?.(colors.primary).catch(() => {});
+  window.desktop?.setThemeAccent?.(colors.primary, uiSettings.appearance).catch(() => {});
 }
 function setSidebarMode(mode) {
   uiSettings.sidebarMode = ["full", "icons", "hidden"].includes(mode) ? mode : "full";

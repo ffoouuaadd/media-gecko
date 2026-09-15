@@ -337,9 +337,15 @@ async function exportBoardImage(dataUrl, suggestedName, format) {
   return result.filePath;
 }
 
-function setThemeIcon(color) {
-  if (!mainWindow || mainWindow.isDestroyed()) return;
+function setWindowTheme(input = {}) {
+  const appearance = input.appearance === "light" ? "light" : "dark";
+  const overlay = appearance === "light"
+    ? { color: "#f1f2f4", symbolColor: "#202327", height: 34 }
+    : { color: "#171717", symbolColor: "#f2f2f2", height: 34 };
+  if (!mainWindow || mainWindow.isDestroyed()) return { appearance, overlay };
   mainWindow.setIcon(nativeImage.createFromPath(iconPng));
+  mainWindow.setTitleBarOverlay(overlay);
+  return { appearance, overlay };
 }
 
 function safeAsset(id) {
@@ -757,7 +763,7 @@ ipcMain.handle("board-import-url", (_event, url) => importBoardUrl(url));
 ipcMain.handle("board-export", (_event, dataUrl, name, format) => exportBoardImage(dataUrl, name, format));
 ipcMain.handle("window-fullscreen", () => { mainWindow.setFullScreen(!mainWindow.isFullScreen()); return mainWindow.isFullScreen(); });
 ipcMain.handle("window-always-on-top", (_event, enabled) => { mainWindow.setAlwaysOnTop(Boolean(enabled), "floating"); return mainWindow.isAlwaysOnTop(); });
-ipcMain.handle("theme-accent", (_event, color) => setThemeIcon(String(color || "")));
+ipcMain.handle("theme-accent", (_event, input) => setWindowTheme(input && typeof input === "object" ? input : { color: String(input || "") }));
 ipcMain.handle("app-info", () => ({ name: app.getName(), version: app.getVersion(), packaged: app.isPackaged }));
 ipcMain.handle("universal-search", (_event, query) => universalSearch(query));
 ipcMain.handle("tray-list", () => trayView());

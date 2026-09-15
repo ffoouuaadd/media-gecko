@@ -42,7 +42,7 @@ contextBridge.exposeInMainWorld("desktop", {
   exportBoard(dataUrl, name, format) { return ipcRenderer.invoke("board-export", dataUrl, name, format); },
   toggleFullscreen() { return ipcRenderer.invoke("window-fullscreen"); },
   setAlwaysOnTop(enabled) { return ipcRenderer.invoke("window-always-on-top", enabled); },
-  setThemeAccent(color) { return ipcRenderer.invoke("theme-accent", color); },
+  setThemeAccent(color, appearance) { return ipcRenderer.invoke("theme-accent", { color, appearance }); },
   getAppInfo() { return ipcRenderer.invoke("app-info"); },
   universalSearch(query) { return ipcRenderer.invoke("universal-search", query); },
   listTray() { return ipcRenderer.invoke("tray-list"); },
