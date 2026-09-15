@@ -1291,6 +1291,39 @@ function showAllWorkspaceFeatures(message = "All tabs restored.") {
 $("#restore-all-tabs").addEventListener("click", () => showAllWorkspaceFeatures());
 $("#show-everything").addEventListener("click", () => showAllWorkspaceFeatures("Everything is visible."));
 
+function cssColorHex(value) {
+  const probe = document.createElement("span");
+  probe.style.color = "";
+  probe.style.color = String(value || "");
+  if (!probe.style.color) return null;
+  document.body.appendChild(probe);
+  const channels = getComputedStyle(probe).color.match(/[\d.]+/g)?.slice(0, 3).map(Number);
+  probe.remove();
+  if (!channels || channels.length !== 3) return null;
+  return `#${channels.map(channel => Math.max(0, Math.min(255, Math.round(channel))).toString(16).padStart(2, "0")).join("")}`;
+}
+function mixHex(base, target, targetWeight) {
+  const a = cssColorHex(base), b = cssColorHex(target);
+  if (!a || !b) return base;
+  const ratio = Math.max(0, Math.min(1, Number(targetWeight)));
+  const channel = index => Math.round(parseInt(a.slice(index, index + 2), 16) * (1 - ratio) + parseInt(b.slice(index, index + 2), 16) * ratio);
+  return `#${[1, 3, 5].map(index => channel(index).toString(16).padStart(2, "0")).join("")}`;
+}
+function buildAccentPalette(value, appearance = "dark") {
+  const primary = cssColorHex(value) || uiSettings.colors.primary;
+  const light = appearance === "light";
+  return {
+    primary,
+    secondary: mixHex(primary, "#000000", light ? 0.18 : 0.25),
+    icon: mixHex(primary, light ? "#101010" : "#ffffff", light ? 0.12 : 0.40),
+    selection: mixHex(primary, light ? "#ffffff" : "#202020", light ? 0.82 : 0.72),
+    glow: primary,
+    button: mixHex(primary, light ? "#000000" : "#202020", light ? 0.12 : 0.55),
+    progress: mixHex(primary, "#ffffff", light ? 0.02 : 0.06),
+    waveform: mixHex(primary, "#ffffff", light ? 0.10 : 0.20),
+  };
+}
+
 function saveUiSettings(sync = true) {
   localStorage.setItem("media-gecko-settings", JSON.stringify(uiSettings));
   applyUiSettings();
@@ -1361,17 +1394,20 @@ $("#settings-section").addEventListener("input", event => {
   if (key) {
     uiSettings[key] = event.target.type === "checkbox" ? event.target.checked : event.target.type === "range" ? Number(event.target.value) : event.target.value;
     if (key === "defaultView") { viewMode = uiSettings.defaultView; localStorage.setItem("media-gecko-view", viewMode); }
+    if (key === "appearance" && uiSettings.theme === "custom") uiSettings.colors = buildAccentPalette(uiSettings.colors.primary, uiSettings.appearance);
     saveUiSettings();
   }
   const colorKey = event.target.dataset.themeColor || event.target.dataset.themeText;
   if (colorKey) {
     const value = event.target.value.trim();
     if (CSS.supports("color", value)) {
-      uiSettings.theme = "custom"; uiSettings.colors[colorKey] = value; saveUiSettings(false);
+      uiSettings.theme = "custom";
+      uiSettings.colors = colorKey === "primary" ? buildAccentPalette(value, uiSettings.appearance) : { ...uiSettings.colors, [colorKey]: value };
+      saveUiSettings(false);
       const color = document.querySelector(`[data-theme-color="${colorKey}"]`);
       const text = document.querySelector(`[data-theme-text="${colorKey}"]`);
-      if (event.target.dataset.themeColor) text.value = value;
-      if (/^#[0-9a-f]{6}$/i.test(value)) color.value = value;
+      if (event.target.dataset.themeColor) text.value = uiSettings.colors[colorKey];
+      if (/^#[0-9a-f]{6}$/i.test(uiSettings.colors[colorKey])) color.value = uiSettings.colors[colorKey];
       $$("[data-theme-preset]").forEach(button => button.classList.remove("active"));
     }
   }
