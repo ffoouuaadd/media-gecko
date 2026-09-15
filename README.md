@@ -4,9 +4,9 @@
 
 ## Download Media Gecko for Windows
 
-[![Download Media Gecko 1.5.2](https://img.shields.io/badge/DOWNLOAD%20FOR%20WINDOWS-Media%20Gecko%201.5.2-ff4e18?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/ffoouuaadd/media-gecko/releases/download/v1.5.2/Media-Gecko-Setup-1.5.2.exe)
+[![Download Media Gecko 1.5.3](https://img.shields.io/badge/DOWNLOAD%20FOR%20WINDOWS-Media%20Gecko%201.5.3-ff4e18?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/ffoouuaadd/media-gecko/releases/download/v1.5.3/Media-Gecko-Setup-1.5.3.exe)
 
-**[⬇ Download the Windows installer directly (.EXE, approximately 162 MB)](https://github.com/ffoouuaadd/media-gecko/releases/download/v1.5.2/Media-Gecko-Setup-1.5.2.exe)**
+**[⬇ Download the Windows installer directly (.EXE, approximately 162 MB)](https://github.com/ffoouuaadd/media-gecko/releases/download/v1.5.3/Media-Gecko-Setup-1.5.3.exe)**
 
 No GitHub knowledge is needed: click the button, wait for the download, run the installer, and launch Media Gecko from the Start menu. Windows may show a SmartScreen notice because the installer is not yet signed with a trusted commercial certificate.
 
@@ -90,7 +90,7 @@ Provider licenses still apply. Check each item before publishing.
 
 ## Windows installer
 
-Run `dist\Media-Gecko-Setup-1.5.2.exe` once. Version 1.5 adds a dedicated Google Images workspace, floating Mini Gecko photo previews, theme-aware SFX puck buttons, neutral theme names, and a branded animated installer finish. Another Windows x64 PC can use the same installer without Node.js or separate media tools. Windows may show a SmartScreen warning because the app does not yet have trusted code signing.
+Run `dist\Media-Gecko-Setup-1.5.3.exe` once. Version 1.5 adds a dedicated Google Images workspace, floating Mini Gecko photo previews, full accent palette customization, theme-aware controls, and a branded animated installer finish. Another Windows x64 PC can use the same installer without Node.js or separate media tools. Windows may show a SmartScreen warning because the app does not yet have trusted code signing.
 
 MyInstants is integrated as a live native-card search. Previewed, saved, or dragged results cache locally as normal MP3 assets; the full remote catalogue is not bundled. Each upload's rights still apply.
 

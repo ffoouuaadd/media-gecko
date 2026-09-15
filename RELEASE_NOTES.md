@@ -1,4 +1,4 @@
-# Media Gecko 1.5.2 — First Public Release
+# Media Gecko 1.5.3 — Theme Polish Update
 
 Media Gecko is a compact Windows creative asset hub built for fast video-editing workflows: **Search → Preview → Drag → Drop.**
 
@@ -11,11 +11,14 @@ Media Gecko is a compact Windows creative asset hub built for fast video-editing
 - Preview audio and images in-app; download media as MP3 or MP4.
 - Work with Mini Gecko, Universal Search, Projects, Gecko Tray, SFX Lab, and Gecko Assistant.
 - Customize navigation, compact layouts, and six polished dark/light themes.
+- Change one accent color and automatically update icons, selections, buttons, progress bars, waveforms, and glow colors.
+- Keep cache controls and native Windows titlebar consistent with light, dark, and custom themes.
+- Support development through a compact, theme-aware Buy Me a Coffee button.
 - Install through the branded Windows setup wizard.
 
 ## Install
 
-1. Download `Media-Gecko-Setup-1.5.2.exe` below.
+1. Download `Media-Gecko-Setup-1.5.3.exe` below.
 2. Run the installer.
 3. Launch Media Gecko from the Start menu or desktop shortcut.
 

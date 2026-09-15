@@ -14,11 +14,11 @@ Media Gecko is a compact Windows desktop app that brings local files, online sou
 
 ## Release title
 
-Media Gecko 1.5.2 — First Public Release
+Media Gecko 1.5.3 — Theme Polish Update
 
 ## Release description
 
-Media Gecko 1.5.2 is the first public Windows release of the compact creative asset hub built for fast video-editing workflows.
+Media Gecko 1.5.3 improves theme consistency across the compact creative asset hub built for fast video-editing workflows.
 
 Highlights:
 
@@ -28,5 +28,6 @@ Highlights:
 - Indexed local library with categories, tags, favorites, projects, and Gecko Tray.
 - Audio/image previews, MP3 and MP4 downloads, Mini Gecko, and Gecko Assistant.
 - Customizable layouts, six themes, compact modes, and an animated branded installer.
+- Full accent palette propagation, themed cache controls, light-mode Windows titlebar, and a compact support button.
 
-Download `Media-Gecko-Setup-1.5.2.exe`, run the installer, and launch Media Gecko from the Start menu. Windows may display a SmartScreen notice because this build is not yet code-signed with a trusted certificate.
+Download `Media-Gecko-Setup-1.5.3.exe`, run the installer, and launch Media Gecko from the Start menu. Windows may display a SmartScreen notice because this build is not yet code-signed with a trusted certificate.

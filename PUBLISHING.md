@@ -9,7 +9,7 @@
 ```powershell
 git init
 git add .
-git commit -m "Release Media Gecko 1.5.2"
+git commit -m "Release Media Gecko 1.5.3"
 git branch -M main
 git remote add origin https://github.com/YOUR-NAME/media-gecko.git
 git push -u origin main
@@ -18,8 +18,8 @@ git push -u origin main
 ## Publish a release
 
 ```powershell
-git tag v1.5.2
-git push origin v1.5.2
+git tag v1.5.3
+git push origin v1.5.3
 ```
 
 The included GitHub Actions workflow builds the Windows installer and attaches it to a GitHub Release.
